@@ -1,7 +1,7 @@
 // import stuff
 import { LitElement, html, css } from 'lit';
 
-export class TvChannel extends LitElement {
+export class lectureSlides extends LitElement {
   // defaults
   constructor() {
     super();
@@ -10,7 +10,7 @@ export class TvChannel extends LitElement {
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
-    return 'tv-channel';
+    return 'lecture-slides';
   }
   // LitElement convention so we update render() when values change
   static get properties() {
@@ -43,4 +43,4 @@ export class TvChannel extends LitElement {
   }
 }
 // tell the browser about our tag and class it should run when it sees it
-customElements.define(TvChannel.tag, TvChannel);
+customElements.define(lectureSlides.tag, lectureSlides);

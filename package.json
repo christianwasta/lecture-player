@@ -1,8 +1,8 @@
 {
-  "name": "tv-app",
-  "description": "Webcomponent tv-app following open-wc recommendations",
+  "name": "lecture-player",
+  "description": "Webcomponent lecture-player following open-wc recommendations",
   "license": "MIT",
-  "author": "tv-app",
+  "author": "lecture-player",
   "version": "0.0.0",
   "scripts": {
     "test": "web-test-runner --coverage",

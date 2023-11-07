@@ -2,9 +2,9 @@
 import { LitElement, html, css } from 'lit';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
-import "./tv-channel.js";
+import "./lecture-slides.js";
 
-export class TvApp extends LitElement {
+export class lecturePlayer extends LitElement {
   // defaults
   constructor() {
     super();
@@ -14,7 +14,7 @@ export class TvApp extends LitElement {
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
-    return 'tv-app';
+    return 'lecture-player';
   }
   // LitElement convention so we update render() when values change
   static get properties() {
@@ -43,16 +43,17 @@ export class TvApp extends LitElement {
       ${
         this.listings.map(
           (item) => html`
-            <tv-channel 
+            <lecture-slides 
               title="${item.title}"
               presenter="${item.metadata.author}"
               @click="${this.itemClick}"
             >
-            </tv-channel>
+            </lecture-slides>
           `
         )
       }
       <div>
+        
         <!-- video -->
         <!-- discord / chat - optional -->
       </div>
@@ -96,4 +97,4 @@ export class TvApp extends LitElement {
   }
 }
 // tell the browser about our tag and class it should run when it sees it
-customElements.define(TvApp.tag, TvApp);
+customElements.define(lecturePlayer.tag, lecturePlayer);
