@@ -9,7 +9,7 @@
     "metadata": {},
     "items": [
       {
-        "id": "item-123-456-789",
+        "id": "item-1",
         "indent": 0,
         "location": "hax-wp-killer.html",
         "slug": "hax-wp-killer",
@@ -26,7 +26,7 @@
         }
       },
       {
-        "id": "item-abc-456-789",
+        "id": "item-2",
         "indent": 0,
         "location": "this-is-water.html",
         "slug": "this-is-water",

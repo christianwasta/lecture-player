@@ -2,6 +2,7 @@
 import { LitElement, html, css } from 'lit';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import "@lrnwebcomponents/video-player/video-player.js";
 import "./lecture-slides.js";
 
 export class lecturePlayer extends LitElement {
@@ -22,6 +23,8 @@ export class lecturePlayer extends LitElement {
       name: { type: String },
       source: { type: String },
       listings: { type: Array },
+      activeID: { type: String },
+      activeItem: { type: Object },
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -53,9 +56,8 @@ export class lecturePlayer extends LitElement {
         )
       }
       <div>
-        
-        <!-- video -->
-        <!-- discord / chat - optional -->
+        <video-player source="https://www.youtube.com/watch?v=LrS7dqokTLE" accent-color="orange" dark track="https://haxtheweb.org/files/HAXshort.vtt"> 
+        </video-player>
       </div>
       <!-- dialog -->
       <sl-dialog label="Dialog" class="dialog">
@@ -71,7 +73,8 @@ export class lecturePlayer extends LitElement {
   }
 
   itemClick(e) {
-    console.log(e.target);
+    console.log(e.target)
+    console.log(e.target.id);
     const dialog = this.shadowRoot.querySelector('.dialog');
     dialog.show();
   }
