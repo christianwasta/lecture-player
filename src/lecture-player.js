@@ -36,29 +36,90 @@ export class lecturePlayer extends LitElement {
         margin: 16px;
         padding: 16px;
       }
+
+      .lecture-container {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        grid-template-rows: 1fr;
+        gap: 32px;
+      }
+
+      .lecture-screen {
+        grid-column: 1/2;
+        grid-row: 1/2;
+      }
+
+      .lecture-slides-list {
+        grid-column: 2/3;
+        grid-row: 1/4;
+      }
+
+      .lecture-slide-info {
+        background-color: red;
+        width: 100%;
+        height: 100%;
+        grid-column: 1/2;
+        grid-row: 2/3;
+      }
+
+      .float-parent {
+        width: 100%;
+      }
+
+      .float-child {
+        width: 50%;
+        float: left;
+      }
+
+      .previous-button {
+        background-color: red; 
+        margin-right: 50%; 
+        height: 100px;
+      }
+
+      .next-button {
+        background-color: red; 
+        margin-left: 50%; 
+        height: 100px;  
+      }
       `
     ];
   }
   // LitElement rendering template of your element
   render() {
     return html`
-      <h2>${this.name}</h2>
-      ${
-        this.listings.map(
-          (item) => html`
-            <lecture-slides 
-              title="${item.title}"
-              presenter="${item.metadata.author}"
-              @click="${this.itemClick}"
-            >
-            </lecture-slides>
-          `
-        )
-      }
-      <div>
+    <div class="lecture-container">
+      <div class="lecture-slides-list">
+        ${
+          this.listings.map(
+            (item) => html`
+              <lecture-slides 
+                title="${item.title}"
+                presenter="${item.metadata.author}"
+                @click="${this.itemClick}"
+              >
+              </lecture-slides>
+            `
+          )
+        }
+      </div>
+      <div class="lecture-screen">
         <video-player source="https://www.youtube.com/watch?v=LrS7dqokTLE" accent-color="orange" dark track="https://haxtheweb.org/files/HAXshort.vtt"> 
         </video-player>
       </div>
+      <div class="lecture-slide-info">test
+      </div>
+      <div class="float-parent">
+        <div class="float-child">
+          <div class="previous-button">prev button</div>
+        </div>
+        <div class="float-child">
+          <div class="next-button">next button</div>
+        </div>
+      </div>
+      
+      
+    </div>
       <!-- dialog -->
       <sl-dialog label="Dialog" class="dialog">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
