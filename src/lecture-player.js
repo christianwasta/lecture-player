@@ -10,8 +10,9 @@ export class lecturePlayer extends LitElement {
   constructor() {
     super();
     this.name = '';
-    this.source = new URL('../assets/channels.json', import.meta.url).href;
+    this.jsonfile = new URL('../assets/channels.json', import.meta.url).href;
     this.listings = [];
+    this.source = 'https://www.youtube.com/watch?v=NqabT21d8VM';
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -21,10 +22,11 @@ export class lecturePlayer extends LitElement {
   static get properties() {
     return {
       name: { type: String },
-      source: { type: String },
+      jsonfile: { type: String },
       listings: { type: Array },
       activeID: { type: String },
       activeItem: { type: Object },
+      source: { type: String },
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -104,7 +106,7 @@ export class lecturePlayer extends LitElement {
         }
       </div>
       <div class="lecture-screen">
-        <video-player source="https://www.youtube.com/watch?v=LrS7dqokTLE" accent-color="orange" dark track="https://haxtheweb.org/files/HAXshort.vtt"> 
+        <video-player source="${this.source}" accent-color="orange" dark track="https://haxtheweb.org/files/HAXshort.vtt"> 
         </video-player>
       </div>
       <div class="lecture-slide-info">test
@@ -117,7 +119,6 @@ export class lecturePlayer extends LitElement {
           <div class="next-button">next button</div>
         </div>
       </div>
-      
       
     </div>
       <!-- dialog -->
@@ -146,14 +147,14 @@ export class lecturePlayer extends LitElement {
       super.updated(changedProperties);
     }
     changedProperties.forEach((oldValue, propName) => {
-      if (propName === "source" && this[propName]) {
+      if (propName === "jsonfile" && this[propName]) {
         this.updateSourceData(this[propName]);
       }
     });
   }
 
-  async updateSourceData(source) {
-    await fetch(source).then((resp) => resp.ok ? resp.json() : []).then((responseData) => {
+  async updateSourceData(jsonfile) {
+    await fetch(jsonfile).then((resp) => resp.ok ? resp.json() : []).then((responseData) => {
       if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) {
         this.listings = [...responseData.data.items];
       }
