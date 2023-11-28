@@ -12,7 +12,8 @@ export class lecturePlayer extends LitElement {
     this.name = '';
     this.jsonfile = new URL('../assets/channels.json', import.meta.url).href;
     this.listings = [];
-    this.source = null;
+    this.source = "https://www.youtube.com/watch?v=NqabT21d8VM";
+    
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -98,6 +99,7 @@ export class lecturePlayer extends LitElement {
               <lecture-slides 
                 title="${item.title}"
                 description="${item.description}"
+                timecode="${item.metadata.timecode}"
                 @click="${this.itemClick}"
               >
               </lecture-slides>
@@ -126,13 +128,8 @@ export class lecturePlayer extends LitElement {
   }
 
   itemClick(e) {
-    const selectedItem = this.listings.find(item => item.title === e.target.title);
-    if (selectedItem) {
-      const itemSource = selectedItem.metadata.source;
-
-      // Update this.source with the clicked item's source
-      this.source = itemSource;
-    }
+    this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').play();
+    this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').seek(e.target.timecode);
   }
 
   // LitElement life cycle for when any property changes
@@ -152,9 +149,6 @@ export class lecturePlayer extends LitElement {
       if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) {
         this.listings = [...responseData.data.items];
       }
-
-    } ).catch((error) => {
-      console.error(error);
     });
   }
 

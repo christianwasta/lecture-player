@@ -7,6 +7,7 @@ export class lectureSlides extends LitElement {
     super();
     this.title = '';
     this.presenter = '';
+    this.timecode=0;
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -16,7 +17,8 @@ export class lectureSlides extends LitElement {
   static get properties() {
     return {
       title: { type: String },
-      description: { type: String },
+      description: { type: String },  
+      timecode: { type: Number },
     };
   }
   // LitElement convention for applying styles JUST to our element
