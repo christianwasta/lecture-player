@@ -12,7 +12,7 @@ export class lecturePlayer extends LitElement {
     this.name = '';
     this.jsonfile = new URL('../assets/channels.json', import.meta.url).href;
     this.listings = [];
-    this.source = 'https://www.youtube.com/watch?v=NqabT21d8VM';
+    this.source = null;
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -97,7 +97,7 @@ export class lecturePlayer extends LitElement {
             (item) => html`
               <lecture-slides 
                 title="${item.title}"
-                presenter="${item.metadata.author}"
+                description="${item.description}"
                 @click="${this.itemClick}"
               >
               </lecture-slides>
@@ -122,23 +122,17 @@ export class lecturePlayer extends LitElement {
       
     </div>
       <!-- dialog -->
-      <sl-dialog label="Dialog" class="dialog">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
-      </sl-dialog>
     `;
   }
 
-  closeDialog(e) {
-    const dialog = this.shadowRoot.querySelector('.dialog');
-    dialog.hide();
-  }
-
   itemClick(e) {
-    console.log(e.target)
-    console.log(e.target.id);
-    const dialog = this.shadowRoot.querySelector('.dialog');
-    dialog.show();
+    const selectedItem = this.listings.find(item => item.title === e.target.title);
+    if (selectedItem) {
+      const itemSource = selectedItem.metadata.source;
+
+      // Update this.source with the clicked item's source
+      this.source = itemSource;
+    }
   }
 
   // LitElement life cycle for when any property changes
@@ -158,8 +152,12 @@ export class lecturePlayer extends LitElement {
       if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) {
         this.listings = [...responseData.data.items];
       }
+
+    } ).catch((error) => {
+      console.error(error);
     });
   }
+
 }
 // tell the browser about our tag and class it should run when it sees it
 customElements.define(lecturePlayer.tag, lecturePlayer);

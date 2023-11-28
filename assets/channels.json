@@ -6,6 +6,7 @@
     "author": "EdTechJoker",
     "description": "A series of talks to learn about JSON and web standard communications",
     "license": "by-sa",
+    "source": "https://www.youtube.com/watch?v=NqabT21d8VM",
     "metadata": {},
     "items": [
       {
@@ -15,12 +16,12 @@
         "slug": "hax-wp-killer",
         "order": 0,
         "parent": null,
-        "title": "HAX: Wordpress Killer",
-        "description": "The future we need, not the future we have.",
+        "title": "Question?",
+        "description": "Main objective and pressure.",
         "metadata": {
-          "source": "https://www.youtube.com/watch?v=9MT-BNuUCpM",
+          "source": "https://www.youtube.com/watch?v=twAP3buj9Og",
           "timecode": 0,
-          "author":"Bryan Ollendyke",
+          "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
         }
@@ -32,12 +33,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "This, is water",
-        "description": "What is water?",
+        "title": "What is pressure",
+        "description": "How much pressure is exerted on a surface?",
         "metadata": {
-          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
-          "timecode": 45,
-          "author":"David Foster Wallace",
+          "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=66s",
+          "timecode": 66,
+          "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
         }
@@ -49,12 +50,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "This, is water",
-        "description": "What is water?",
+        "title": "Atmospheric pressure",
+        "description": "What happens when we go down?",
         "metadata": {
-          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
-          "timecode": 45,
-          "author":"David Foster Wallace",
+          "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=127s",
+          "timecode": 127,
+          "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
         }
@@ -66,12 +67,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "This, is water",
-        "description": "What is water?",
+        "title": "How do you measure such atmospheric pressures?",
+        "description": "The Center for Matter at Atmospheric Pressures.",
         "metadata": {
-          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
-          "timecode": 45,
-          "author":"David Foster Wallace",
+          "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=314s",
+          "timecode": 314,
+          "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
         }
@@ -83,12 +84,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "This, is water",
-        "description": "What is water?",
+        "title": "Finishing the journey",
+        "description": "Pressure as we get to the core of the earth.",
         "metadata": {
-          "source": "https://www.youtube.com/watch?v=eC7xzavzEKY",
-          "timecode": 45,
-          "author":"David Foster Wallace",
+          "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=507s",
+          "timecode": 507,
+          "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
         }
