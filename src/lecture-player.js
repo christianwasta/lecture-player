@@ -7,7 +7,6 @@ import '@shoelace-style/shoelace/dist/components/card/card.js';
 import '@shoelace-style/shoelace/dist/components/details/details.js';
 import "@lrnwebcomponents/video-player/video-player.js";
 import "./lecture-slides.js";
-import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/input/input.js';
 
 export class lecturePlayer extends LitElement {
   // defaults
@@ -110,10 +109,11 @@ export class lecturePlayer extends LitElement {
   itemClick(e) {
     this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').play();
     this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').seek(e.target.timecode);
-    // on click, add information to the dialog
-    this.infoDescription = e.target.description;
+    // on click, add information to lecture-slide-info
+    this.infoDescription = e.target.slideInfo;
   }
 
+  // Next slide button
   showNextSlide() {
     const currentSlide = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').media.currentTime;
     const nextSlide = this.listings.find((item) => item.metadata.timecode > currentSlide);
@@ -123,6 +123,7 @@ export class lecturePlayer extends LitElement {
     }
   }
 
+  // Previous slide button
   showPreviousSlide() {
     const currentVidTime = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').media.currentTime;
     const repeatSlide = this.listings.findLast((item) => item.metadata.timecode < currentVidTime);
@@ -154,6 +155,9 @@ export class lecturePlayer extends LitElement {
     });
   }
 
+  // Tracks where the current time is in the video and updates the slide titles to show active state.
+  // I was unable to get shoelace to .focus() on the active slide shown here: https://shoelace.style/getting-started/usage#methods
+  // Had to change the title to "active" instead. Changing background color could also work if using normal <button>.
   firstUpdated() {
     setInterval(() => {
       const videoPlayer = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').media;
@@ -165,7 +169,9 @@ export class lecturePlayer extends LitElement {
       if (activeSlide) {
         activeSlide.setAttribute('title', 'Active'); 
       }
-      
+      if (previousSlide) {
+        this.infoDescription = previousSlide.slideInfo;
+      }
       const allSlides = this.shadowRoot.querySelectorAll('lecture-slides');
       allSlides.forEach((slide) => {
         if (slide !== activeSlide) {
@@ -174,7 +180,7 @@ export class lecturePlayer extends LitElement {
       });
     }, 2000);
   }
-  
+
   resetSlideTitles() {
     const slides = this.shadowRoot.querySelectorAll('lecture-slides');
     slides.forEach((slide) => {

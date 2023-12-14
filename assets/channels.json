@@ -18,6 +18,7 @@
         "parent": null,
         "title": "Question?",
         "description": "Main objective and pressure.",
+        "slideInfo": "Added more information for the lecture-slide-info requirement. Changes to the timecode whether user selects a new slide or the video passes through a slide will cause a state change.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM",
           "timecode": 0,
@@ -35,6 +36,7 @@
         "parent": null,
         "title": "What is pressure",
         "description": "How much pressure is exerted on a surface?",
+        "slideInfo": "Pressure: Continuous physical force exerted on or against an object by something in contact with it.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=66s",
           "timecode": 66,
@@ -52,6 +54,7 @@
         "parent": null,
         "title": "Atmospheric pressure",
         "description": "What happens when we go down?",
+        "slideInfo": "Atmospheric Pressure: The pressure exerted by the weight of the atmosphere, which at sea level has a mean value of 101,325 pascals (roughly 14.6959 pounds per square inch).",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=127s",
           "timecode": 127,
@@ -69,6 +72,7 @@
         "parent": null,
         "title": "How do you measure such atmospheric pressures?",
         "description": "The Center for Matter at Atmospheric Pressures.",
+        "slideInfo": "What is the Center for Matter at Atomic Pressures? The Center for Matter at Atomic Pressures (CMAP) is a new NSF Physics Frontiers Center that explores matter at pressures strong enough to change the nature of atoms themselves.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=314s",
           "timecode": 314,
@@ -86,6 +90,7 @@
         "parent": null,
         "title": "Finishing the journey",
         "description": "Pressure as we get to the core of the earth.",
+        "slideInfo": "What happens to pressure as we get closer to the core of the earth? The temperature and the pressure both increase as we go deeper within the Earth, toward its core. In fact, the temperature and pressure at the core are greater than they are in the outer core and in the mantle, which is the layer surrounding the core.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=507s",
           "timecode": 507,
@@ -101,11 +106,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "Finishing the journey",
-        "description": "Pressure as we get to the core of the earth.",
+        "title": "Extra slide",
+        "description": "To show scrollbar.",
+        "slideInfo": "Extra text. Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=507s",
-          "timecode": 507,
+          "timecode": 530,
           "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
@@ -118,11 +124,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "Finishing the journey",
-        "description": "Pressure as we get to the core of the earth.",
+        "title": "Extra slide",
+        "description": "To show scrollbar.",
+        "slideInfo": "Extra text. Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=507s",
-          "timecode": 507,
+          "timecode": 530,
           "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
@@ -135,11 +142,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "Finishing the journey",
-        "description": "Pressure as we get to the core of the earth.",
+        "title": "Extra slide",
+        "description": "To show scrollbar.",
+        "slideInfo": "Extra text. Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=507s",
-          "timecode": 507,
+          "timecode": 530,
           "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
@@ -152,11 +160,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "Finishing the journey",
-        "description": "Pressure as we get to the core of the earth.",
+        "title": "Extra slide",
+        "description": "To show scrollbar.",
+        "slideInfo": "Extra text. Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=507s",
-          "timecode": 507,
+          "timecode": 530,
           "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
@@ -169,11 +178,12 @@
         "slug": "this-is-water",
         "order": 0,
         "parent": null,
-        "title": "Finishing the journey",
-        "description": "Pressure as we get to the core of the earth.",
+        "title": "Extra slide",
+        "description": "To show scrollbar.",
+        "slideInfo": "Extra text. Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=NqabT21d8VM&t=507s",
-          "timecode": 507,
+          "timecode": 530,
           "author":"Vox",
           "created": 1697033522,
           "updated": 1697034021
