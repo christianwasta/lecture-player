@@ -2,8 +2,12 @@
 import { LitElement, html, css } from 'lit';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@shoelace-style/shoelace/dist/components/button-group/button-group.js';
+import '@shoelace-style/shoelace/dist/components/card/card.js';
+import '@shoelace-style/shoelace/dist/components/details/details.js';
 import "@lrnwebcomponents/video-player/video-player.js";
 import "./lecture-slides.js";
+import 'https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/components/input/input.js';
 
 export class lecturePlayer extends LitElement {
   // defaults
@@ -12,8 +16,8 @@ export class lecturePlayer extends LitElement {
     this.name = '';
     this.jsonfile = new URL('../assets/channels.json', import.meta.url).href;
     this.listings = [];
-    this.source = "https://www.youtube.com/watch?v=NqabT21d8VM";
-    
+    this.source = "";
+    this.infoDescription = "";
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -28,6 +32,8 @@ export class lecturePlayer extends LitElement {
       activeID: { type: String },
       activeItem: { type: Object },
       source: { type: String },
+      infoDescription: { type: String },
+      
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -47,55 +53,30 @@ export class lecturePlayer extends LitElement {
         gap: 32px;
       }
 
-      .lecture-screen {
-        grid-column: 1/2;
-        grid-row: 1/2;
-      }
-
       .lecture-slides-list {
         grid-column: 2/3;
         grid-row: 1/4;
+        overflow-y: scroll;
+        max-height: 100vh;
       }
 
       .lecture-slide-info {
-        background-color: red;
         width: 100%;
         height: 100%;
         grid-column: 1/2;
         grid-row: 2/3;
       }
-
-      .float-parent {
-        width: 100%;
-      }
-
-      .float-child {
-        width: 50%;
-        float: left;
-      }
-
-      .previous-button {
-        background-color: red; 
-        margin-right: 50%; 
-        height: 100px;
-      }
-
-      .next-button {
-        background-color: red; 
-        margin-left: 50%; 
-        height: 100px;  
-      }
       `
     ];
   }
+
   // LitElement rendering template of your element
   render() {
     return html`
     <div class="lecture-container">
       <div class="lecture-slides-list">
-        ${
-          this.listings.map(
-            (item) => html`
+        ${this.listings.map(
+      (item) => html`
               <lecture-slides 
                 title="${item.title}"
                 description="${item.description}"
@@ -104,24 +85,23 @@ export class lecturePlayer extends LitElement {
               >
               </lecture-slides>
             `
-          )
-        }
+    )
+      }
       </div>
-      <div class="lecture-screen">
-        <video-player source="${this.source}" accent-color="orange" dark track="https://haxtheweb.org/files/HAXshort.vtt"> 
+        <video-player source="${this.source}" accent-color="white" > 
         </video-player>
-      </div>
-      <div class="lecture-slide-info">test
-      </div>
-      <div class="float-parent">
-        <div class="float-child">
-          <div class="previous-button">prev button</div>
-        </div>
-        <div class="float-child">
-          <div class="next-button">next button</div>
-        </div>
-      </div>
       
+      <div class="float-parent">
+        <div style="float: right">		
+          <sl-button class="next-button" @click="${this.showNextSlide}">Next</sl-button>
+        </div>
+        <div>		
+          <sl-button class="default" @click="${this.showPreviousSlide}">Previous</sl-button>
+        </div>
+      </div>
+      <div class="lecture-slide-info">
+          <sl-details summary="Lecture Slide Info">${this.infoDescription}</sl-details>
+      </div>
     </div>
       <!-- dialog -->
     `;
@@ -130,6 +110,27 @@ export class lecturePlayer extends LitElement {
   itemClick(e) {
     this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').play();
     this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').seek(e.target.timecode);
+    // on click, add information to the dialog
+    this.infoDescription = e.target.description;
+  }
+
+  showNextSlide() {
+    const currentSlide = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').media.currentTime;
+    const nextSlide = this.listings.find((item) => item.metadata.timecode > currentSlide);
+
+    if (nextSlide) {
+      this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').seek(nextSlide.metadata.timecode);
+    }
+  }
+
+  showPreviousSlide() {
+    const currentVidTime = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').media.currentTime;
+    const repeatSlide = this.listings.findLast((item) => item.metadata.timecode < currentVidTime);
+    const twoSlidesAgo = this.listings.findLast((item) => item.metadata.timecode < repeatSlide.metadata.timecode);
+
+    if (repeatSlide) {
+      this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').seek(twoSlidesAgo.metadata.timecode);
+    }
   }
 
   // LitElement life cycle for when any property changes
@@ -148,7 +149,37 @@ export class lecturePlayer extends LitElement {
     await fetch(jsonfile).then((resp) => resp.ok ? resp.json() : []).then((responseData) => {
       if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) {
         this.listings = [...responseData.data.items];
+        this.activeItem = this.listings[0];
       }
+    });
+  }
+
+  firstUpdated() {
+    setInterval(() => {
+      const videoPlayer = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').media;
+      const currentTime = videoPlayer.currentTime;
+      const previousSlide = this.listings.findLast((item) => item.metadata.timecode < currentTime);
+    
+      this.resetSlideTitles();
+      const activeSlide = this.shadowRoot.querySelector(`lecture-slides[timecode="${previousSlide.metadata.timecode}"]`);
+      if (activeSlide) {
+        activeSlide.setAttribute('title', 'Active'); 
+      }
+      
+      const allSlides = this.shadowRoot.querySelectorAll('lecture-slides');
+      allSlides.forEach((slide) => {
+        if (slide !== activeSlide) {
+          slide.setAttribute('title', slide.title);
+        }
+      });
+    }, 2000);
+  }
+  
+  resetSlideTitles() {
+    const slides = this.shadowRoot.querySelectorAll('lecture-slides');
+    slides.forEach((slide) => {
+      slide.originalTitle = slide.originalTitle || slide.title;
+        slide.setAttribute('title', slide.originalTitle);
     });
   }
 

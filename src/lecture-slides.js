@@ -1,5 +1,6 @@
 // import stuff
 import { LitElement, html, css } from 'lit';
+import '@shoelace-style/shoelace/dist/components/button/button.js';
 
 export class lectureSlides extends LitElement {
   // defaults
@@ -9,6 +10,7 @@ export class lectureSlides extends LitElement {
     this.presenter = '';
     this.timecode=0;
   }
+
   // convention I enjoy using to define the tag's name
   static get tag() {
     return 'lecture-slides';
@@ -25,21 +27,30 @@ export class lectureSlides extends LitElement {
   static get styles() {
     return css`
       :host {
-        display: inline-flex;
+        display: grid;
       }
-      .wrapper {
-        padding: 16px;
-        background-color: #eeeeee;
+
+      h3, h4 {
+        white-space: normal;
       }
     `;
   }
+
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
+    // Focus the sl-button element after the component is rendered
+    const slButton = this.shadowRoot.querySelector('sl-button');
+    slButton.focus();
+  }
+
   // LitElement rendering template of your element
   render() {
     return html`
-      <div class="wrapper">
+      <sl-button style="overflow: hidden">
         <h3>${this.title}</h3>
         <h4>${this.description}</h4>
-      </div>  
+      </sl-button>
       `;
   }
 }
